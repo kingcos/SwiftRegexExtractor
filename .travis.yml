@@ -1,0 +1,9 @@
+os:
+  - osx
+language: generic
+sudo: required
+dist: trusty
+osx_image: xcode10
+script:
+  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/dev/CI/ci)"
+  - eval "$(curl -sL https://raw.githubusercontent.com/kingcos/WWDCHelper/dev/CI/codecov)"
