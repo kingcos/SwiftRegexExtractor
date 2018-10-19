@@ -12,17 +12,8 @@ class SwiftRegexExtractorTests: XCTestCase {
     ]
     
     func testSwiftRegexExtractorBySpectre() {
-        
         let currentPath = Path(#file).parent().parent() + "Attachments"
-        
-        describe("--- SwiftRegexExtractor Tests ---") {
-
-            let extractor = RegexExtractor.shared
-
-            $0.it("should read content from path") {
-                let inputFilename = "InputFile.txt"
-                let path = (currentPath + inputFilename).description
-                let expectContent = """
+        let exampleContent = """
 Pull requests
 Issues
 Marketplace
@@ -132,8 +123,24 @@ Blog
 About
 Press h to open a hovercard with more details.
 """
-                try expect(extractor.read(path)) == expectContent
+        
+        describe("--- SwiftRegexExtractor Tests ---") {
+            
+            $0.it("should extract from content by regex") {
+                let emojiPattern1 = "[\\p{Emoji_Presentation}\\u26F1]"
+                let emojiPattern2 = "\\p{Emoji}\\uFE0F"
+                let emojiPattern3 = "\\p{Emoji_Modifier_Base}\\p{Emoji_Modifier}"
+                let emojiPattern4 = "[\\U0001F1E6-\\U0001F1FF][\\U0001F1E6-\\U0001F1FF]"
+                let pattern = "\(emojiPattern4)|\(emojiPattern3)|\(emojiPattern2)|\(emojiPattern1)"
+                
+                try expect(RegexExtractor.extractByLines(exampleContent, by: pattern)) == ["📝", "⏬", "✏️", "🔧", "🌼", "🚀"]
+            }
 
+            $0.it("should read content from path") {
+                let inputFilename = "InputFile.txt"
+                let path = (currentPath + inputFilename).description
+
+                try expect(RegexExtractor.read(path)) == exampleContent
             }
         }
     }
