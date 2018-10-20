@@ -25,7 +25,7 @@ let package = Package(
                 "PathKit"
             ]),
         .testTarget(
-            name: "SwiftRegexExtractorTests",
+            name: "RegexExtractorKitTests",
             dependencies: [
                 "RegexExtractorKit",
                 "Spectre",

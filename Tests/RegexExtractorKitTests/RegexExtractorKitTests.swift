@@ -1,17 +1,17 @@
 import XCTest
-//import class Foundation.Bundle
+import class Foundation.Bundle
 
 import PathKit
 import Spectre
 
 @testable import RegexExtractorKit
 
-class SwiftRegexExtractorTests: XCTestCase {
+class RegexExtractorKitTests: XCTestCase {
     static var allTests = [
-        ("test by Spectre", testSwiftRegexExtractorBySpectre)
+        ("test by Spectre", testRegexExtractorKitBySpectre)
     ]
     
-    func testSwiftRegexExtractorBySpectre() {
+    func testRegexExtractorKitBySpectre() {
         let currentPath = Path(#file).parent().parent() + "Attachments"
         let exampleContent = """
 Pull requests
