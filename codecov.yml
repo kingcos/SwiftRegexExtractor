@@ -3,5 +3,4 @@ comment:
 coverage:
   ignore:
   - Tests
-  - resources
   - CI
