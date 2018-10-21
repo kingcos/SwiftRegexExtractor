@@ -8,10 +8,6 @@
 import Foundation
 
 public struct RegexExtractor {
-    var regexPatterns: [String]
-    var inputFilePaths: [String]
-    var outputFilePaths: [String]
-    
     static func read(_ path: String) -> String? {
         guard let url = URL(string: path) else { return nil }
         

@@ -8,7 +8,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/kylef/Spectre.git", from: "0.9.0"),
-        .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.2")
+        .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.2"),
+        .package(url: "https://github.com/kingcos/CommandLine.git", from: "4.2.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -16,7 +17,8 @@ let package = Package(
         .target(
             name: "SwiftRegexExtractor",
             dependencies: [
-                "RegexExtractorKit"
+                "RegexExtractorKit",
+                "CommandLine"
             ]),
         .target(
             name: "RegexExtractorKit",
