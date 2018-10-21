@@ -1,6 +1,6 @@
 language: swift
 osx_image: xcode10
 script:
-  - xcodebuild -project SwiftRegexExtractor -scheme SwiftRegexExtractor -sdk macosx10.14 -destination arch=x86_64 -configuration Debug -enableCodeCoverage YES test | xcpretty
+  - xcodebuild -scheme SwiftRegexExtractor -sdk macosx10.14 -destination arch=x86_64 build test
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J SwiftRegexExtractor
