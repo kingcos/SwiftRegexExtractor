@@ -10,20 +10,17 @@ import Foundation
 import RegexExtractorKit
 import CommandLineKit
 
-let version = "v0.1.0"
+let version = "SwiftRegexExtractor by github.com/kingcos: v0.1.0"
 let cli = CommandLineKit.CommandLine()
 
 let inputFilePathOption = StringOption(shortFlag: "i",
                                        longFlag: "input",
-                                       required: true,
                                        helpMessage: "Setup file path for input.")
 let outputFilePathOption = StringOption(shortFlag: "o",
                                         longFlag: "output",
-                                        required: false,
                                         helpMessage: "Setup file path for output (Default is command line interface).")
 let regexOption = StringOption(shortFlag: "r",
                                longFlag: "regex",
-                               required: true,
                                helpMessage: "Regular expression.")
 let helpOption = BoolOption(shortFlag: "h",
                             longFlag: "help",
@@ -55,8 +52,23 @@ if versionOption.value {
     exit(EX_OK)
 }
 
-let inputFilePath = inputFilePathOption.value
-let outputFilePath = outputFilePathOption.value
-let regex = regexOption.value
+guard let inputFilePath = inputFilePathOption.value,
+      let outputFilePath = outputFilePathOption.value,
+      let regex = regexOption.value else {
+        cli.printUsage()
+        exit(EX_OK)
+}
 
-
+do {
+    try RegexExtractor.run(inputFilePath, outputFilePath, regex)
+} catch {
+    guard let err = error as? RegexExtractorError else {
+        print("ERROR: \(error.localizedDescription).")
+        exit(EX_USAGE)
+    }
+    
+    switch err {
+    default:
+        print("ERROR")
+    }
+}
