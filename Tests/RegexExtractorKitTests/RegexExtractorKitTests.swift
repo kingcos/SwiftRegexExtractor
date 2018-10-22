@@ -135,12 +135,23 @@ Press h to open a hovercard with more details.
                 
                 try expect(RegexExtractor.extractByLines(exampleContent, by: pattern)) == ["📝", "⏬", "✏️", "🔧", "🌼", "🚀"]
             }
+            
+            $0.it("should write content to file, then read content from path") {
+                let outputFileName = "DemoFile.txt"
+                let path = (currentPath + outputFileName).description
 
-            $0.it("should read content from path") {
-                let inputFilename = "InputFile.txt"
-                let path = (currentPath + inputFilename).description
+                do {
+                    try RegexExtractor.write(exampleContent, to: path)
 
-                try expect(RegexExtractor.read(path)) == exampleContent
+                    guard let content = RegexExtractor.read(path) else {
+                        XCTFail()
+                        return
+                    }
+
+                    try expect(content) == exampleContent
+                } catch {
+                    XCTFail()
+                }
             }
         }
     }
