@@ -22,10 +22,7 @@ let package = Package(
             ]),
         .target(
             name: "RegexExtractorKit",
-            dependencies: [
-                "Spectre",
-                "PathKit"
-            ]),
+            dependencies: []),
         .testTarget(
             name: "RegexExtractorKitTests",
             dependencies: [
