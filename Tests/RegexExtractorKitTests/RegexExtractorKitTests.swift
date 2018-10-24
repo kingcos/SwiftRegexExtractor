@@ -12,7 +12,7 @@ class RegexExtractorKitTests: XCTestCase {
     ]
     
     func testRegexExtractorKitBySpectre() {
-        let currentPath = Path(#file).parent().parent() + "Attachments"
+        let currentPath = Path(#file).parent().parent()
         let exampleContent = """
 Pull requests
 Issues
@@ -139,7 +139,7 @@ Press h to open a hovercard with more details.
             $0.it("should write content to file, then read content from path") {
                 let outputFileName = "DemoFile.txt"
                 let path = (currentPath + outputFileName).description
-                print("----: \(path)")
+                
                 do {
                     try RegexExtractor.write(exampleContent, to: path)
 
