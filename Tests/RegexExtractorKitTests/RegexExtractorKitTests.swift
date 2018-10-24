@@ -150,6 +150,14 @@ Press h to open a hovercard with more details.
 
                     try expect(content) == exampleContent
                 } catch {
+                    switch error {
+                    case RegexExtractorError.fileAlreadyExist:
+                        print("ERROR: File is already exist.")
+                    case RegexExtractorError.unsupportedPath:
+                        print("ERROR: Unsupported path.")
+                    default:
+                        print("ERROR: \(error.localizedDescription).")
+                    }
                     XCTFail()
                 }
             }

@@ -68,24 +68,13 @@ extension RegexExtractor {
     }
     
     public static func write(_ content: String, to path: String) throws {
-        do {
-            if let _ = try isFileExist(path) {
-                throw RegexExtractorError.fileAlreadyExist
+        if let _ = try isFileExist(path) {
+            throw RegexExtractorError.fileAlreadyExist
+        } else {
+            if let url = URL(string: "file://" + path) {
+                try content.write(to: url, atomically: true, encoding: .utf8)
             } else {
-                if let url = URL(string: "file://" + path) {
-                    try content.write(to: url, atomically: true, encoding: .utf8)
-                } else {
-                    throw RegexExtractorError.unsupportedPath
-                }
-            }
-        } catch {
-            switch error {
-            case RegexExtractorError.fileAlreadyExist:
-                print("ERROR: File is already exist.")
-            case RegexExtractorError.unsupportedPath:
-                print("ERROR: Unsupported path.")
-            default:
-                print("ERROR: \(error.localizedDescription).")
+                throw RegexExtractorError.unsupportedPath
             }
         }
     }
